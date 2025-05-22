@@ -5,6 +5,8 @@
 Дата написания: 08.04.2025
 """
 
+from db_manager import DataBaseManager
+
 def main():
     db_manager = DataBaseManager('data.csv')
 
