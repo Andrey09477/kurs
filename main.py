@@ -5,25 +5,28 @@
 Дата написания: 08.04.2025
 """
 
-from task import file, menu, database, calculate
+def main():
+    db_manager = DataBaseManager('data.csv')
 
-bd = file.read()
+    """ вывод меню и ввода выбранного пункта """
 
-num = 0
-while num != 6:
-    num = menu.menu()
-    match num:
-        case 1:
-            database.prnt(bd)
-        case 2:
-            bd = database.add(bd)
-        case 3:
-            calculate.calc(bd) 
-        case 4:
-            database.search(bd) 
-        case 5:
-            bd = database.delete(bd) 
-        case 6:
-            print("Выход из программы.")
+    print()
+    print(' МЕНЮ: '.center(50, '*'))
+    print('''
+        1. Просмотр всей базы данных
+        2. Добавление новых записей
+        3. Вычисления: средняя масса мальчиков, средний рост девочек, самый высокий ученик
+        4. Поиск записи по фамилии и имени
+        5. Удаление записи по фамилии и имени
+        6. Выход\n
+    ''')
+    
+    num = input('Выберите пункт меню: ')
+    while not num.isdigit() or int(num) not in range(1, 7):
+        num = input('Повторите выбор пункта меню: ')
 
-file.write(bd) 
+    if num == '1':
+        db_manager.display_table()
+
+if __name__ == "__main__":
+    main()
