@@ -7,12 +7,8 @@
 
 from db_manager import DataBaseManager
 
-def main():
-    db_manager = DataBaseManager('data.csv')
-
-    """ вывод меню и ввода выбранного пункта """
-
-    print()
+def select_action():
+    print('\n Выберите пункт меню: \n')
     print(' МЕНЮ: '.center(50, '*'))
     print('''
         1. Просмотр всей базы данных
@@ -23,12 +19,30 @@ def main():
         6. Выход\n
     ''')
     
-    num = input('Выберите пункт меню: ')
+    num = input()
     while not num.isdigit() or int(num) not in range(1, 7):
         num = input('Повторите выбор пункта меню: ')
+    return num
 
-    if num == '1':
-        db_manager.display_table()
+def main():
+    db_manager = DataBaseManager('data.csv')
+
+    num = select_action()
+    while num != '6':
+        if num == '1':
+            db_manager.display_table()
+        elif num == '2':
+            db_manager.add()
+        # elif 3:
+        #     calculate.calc(bd)
+        # elif 4:
+        #     database.search(bd) 
+        # elif 5:
+        #     bd = database.delete(bd)
+        else:
+            break
+        num = select_action()
+    print("Выход из программы.")
 
 if __name__ == "__main__":
     main()
